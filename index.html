@@ -18,7 +18,8 @@
 <p>If you turn on the weekly digest in Options, Binder wakes up once a week at the day and time you pick (Chrome alarms) and:</p>
 <ul>
 <li>in Notion, lists the pages created in your Binds database (or under your Binds page) during the past 7 days — their titles, links, categories and types — and creates one "Weekly digest" page there;</li>
-<li>in Obsidian (vault folder), reads the frontmatter (title, type, saved date, category) of the notes in your chosen folder and writes <code>Digests/Weekly digest YYYY-MM-DD.md</code>;</li>
+<li>if you chose <b>A separate page</b> for digests, it also reads the TL;DR and highlights Binder wrote on those pages (and highlights added this week to older Binds), creates the week's page as a subpage of the page you picked (or of a "Binds Digests" page Binder creates there when you ask), and adds a link to it on that page;</li>
+<li>in Obsidian (vault folder), reads the frontmatter (title, type, saved date, category) of the notes in your chosen folder and also reads the TL;DR and highlights in those notes, and writes <code>Weekly digest YYYY-MM-DD.md</code> into your digest folder (<code>Digests</code> by default);</li>
 <li>if "AI overview" is on, sends only the titles and categories of that week's Binds to your AI provider to write a short summary of themes.</li>
 </ul>
 <p>Nothing else is read, and nothing runs if the digest is off. "Generate now" in Options does the same once, on demand.</p>
