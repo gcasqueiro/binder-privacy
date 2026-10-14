@@ -1,40 +1,55 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Binder privacy policy</title><style>body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;max-width:680px;margin:48px auto;padding:0 20px;color:#1d1d1f;background:#fff}h1{font-size:32px;letter-spacing:-.02em}h2{font-size:20px;margin-top:2em}a{color:inherit}code{background:#f2f2f4;padding:1px 5px;border-radius:5px}@media(prefers-color-scheme:dark){body{background:#111;color:#f5f5f7}code{background:#2a2a2c}}</style></head><body><h1>Binder privacy policy</h1>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Binder privacy policy</title><style>body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;max-width:680px;margin:48px auto;padding:0 20px;color:#1d1d1f;background:#fff}h1{font-size:32px;letter-spacing:-.02em}h2{font-size:20px;margin-top:2em}a{color:inherit}code{background:#f2f2f4;padding:1px 5px;border-radius:5px}@media(prefers-color-scheme:dark){body{background:#111;color:#f5f5f7}code{background:#2a2a2c}}</style></head><body>
+<h1>Binder privacy policy</h1>
 <p>Last updated: 14 October 2026</p>
 <p>This document lists what data the Binder Chrome extension handles, where it is sent and where it is stored. Binder has no server of its own and no analytics.</p>
 <h2>When Binder reads a page</h2>
-<p>Binder runs on a page only after you press the shortcut (Alt+S by default) or click its toolbar button. It then reads, from that tab only:</p>
+<p>Binder runs on a page only after you press the shortcut (Alt+S by default), click its toolbar button, or choose <b>Bind highlight</b> from the right-click menu. It then reads, from that tab only:</p>
 <ul>
 <li>the URL, title, meta tags (description, author, published date, site name, <code>og:image</code>) and JSON-LD;</li>
 <li>the readable text of the page (via Mozilla Readability);</li>
 <li>in Full reader view, the article structure (headings, paragraphs, lists, quotes, code, images and links);</li>
-<li>on X (x.com / twitter.com), the posts of the thread shown on the page.</li>
+<li>on X (x.com / twitter.com), the posts of the thread shown on the page;</li>
+<li>the text you selected, if any, which is saved as a highlight.</li>
 </ul>
-<p>Nothing is read or sent until you confirm the save in the overlay.</p>
+<p>Nothing is read or sent until you confirm the save in the overlay. When the overlay opens for a Notion database, Binder asks Notion whether that page's URL is already in the database, so it can show "Already bound" (and add a highlight to the earlier Bind instead of creating a new one).</p>
+<h2>Bind this link (right-click menu)</h2>
+<p>When you choose <b>Bind this link</b> on a link, Binder downloads that one linked page and reads it the same way (title, meta tags, readable text, and in Full reader view the article structure). The page is fetched without your cookies, and its HTML is parsed inside the extension; scripts in it are never run. To fetch it, Binder needs access to that site: a small Binder window asks you, and the access is removed again right after the Bind. Links to X posts use the X endpoint described below and need no extra access. The result is shown on Binder's toolbar icon; Binder does not use notifications.</p>
+<h2>Weekly digest (optional, off by default)</h2>
+<p>If you turn on the weekly digest in Options, Binder wakes up once a week at the day and time you pick (Chrome alarms) and:</p>
+<ul>
+<li>in Notion, lists the pages created in your Binds database (or under your Binds page) during the past 7 days — their titles, links, categories and types — and creates one "Weekly digest" page there;</li>
+<li>in Obsidian (vault folder), reads the frontmatter (title, type, saved date, category) of the notes in your chosen folder and writes <code>Digests/Weekly digest YYYY-MM-DD.md</code>;</li>
+<li>if "AI overview" is on, sends only the titles and categories of that week's Binds to your AI provider to write a short summary of themes.</li>
+</ul>
+<p>Nothing else is read, and nothing runs if the digest is off. "Generate now" in Options does the same once, on demand.</p>
 <h2>Data sent to Notion (api.notion.com)</h2>
 <p>When the destination is Notion, Binder sends with your integration token:</p>
 <ul>
 <li>the page properties: title, URL, author, published date, save date, type, tags, category and your personal note, as far as your database has matching properties;</li>
 <li>the AI summary (TL;DR, key points, quotes, takeaways) as blocks;</li>
 <li>in Full reader view, the article content or the X thread;</li>
-<li>the cover image: Binder downloads the page&#39;s <code>og:image</code> and uploads it to Notion through Notion&#39;s file upload API;</li>
-<li>in Full reader view, the article&#39;s images: Binder downloads them from the site that hosts them (for example pbs.twimg.com for X) and uploads them to Notion; if a download is not allowed, the image is linked instead;</li>
+<li>the cover image: Binder downloads the page's <code>og:image</code> and uploads it to Notion through Notion's file upload API;</li>
+<li>in Full reader view, the article's images: Binder downloads them from the site that hosts them (for example pbs.twimg.com for X) and uploads them to Notion; if a download is not allowed, the image is linked instead;</li>
+<li>a highlight (the selected text and a link back to it) appended to an earlier Bind of the same page, or placed on top of a new Bind;</li>
+<li>for the duplicate check: a query of your Binds database for the page's URL;</li>
+<li>for the weekly digest (if enabled): a query of that week's pages in your Binds database and one new "Weekly digest" page with links to them;</li>
 <li>during setup and in Options: searches for the pages and databases shared with the integration, reads their titles, parent pages and properties, and creates a database or page if you ask it to. This happens only while Options is open.</li>
 </ul>
 <h2>Data sent to the AI provider</h2>
-<p>Binder sends one request per Bind to the provider you chose (xAI, OpenAI, Anthropic, Google Gemini, OpenRouter or a custom OpenAI-compatible endpoint), using your API key. The request contains the page title, URL, author, site name, description, up to about 24,000 characters of the readable text (or the thread text), and the names of your existing Notion categories. The provider&#39;s own terms apply to that data. No AI request is made for the &quot;Send a test Bind&quot; button. The <strong>Test key</strong> button in Options sends one request to the provider&#39;s model list or key endpoint (for example <code>api.x.ai/v1/models</code>) with your key; if the key may not list models, it sends a one-token &quot;ping&quot; generation instead. No page content is sent.</p>
+<p>Binder sends one request per Bind to the provider you chose (none when a highlight is only added to an earlier Bind) (xAI, OpenAI, Anthropic, Google Gemini, OpenRouter or a custom OpenAI-compatible endpoint), using your API key. The request contains the page title, URL, author, site name, description, up to about 24,000 characters of the readable text (or the thread text), and the names of your existing Notion categories. The weekly digest, if enabled with its AI overview, sends one request per week with only the titles and categories of that week's Binds. The provider's own terms apply to that data. No AI request is made for the "Send a test Bind" button. The <b>Test key</b> button in Options sends one request to the provider's model list or key endpoint (for example <code>api.x.ai/v1/models</code>) with your key; if the key may not list models, it sends a one-token "ping" generation instead. No page content is sent.</p>
 <h2>Data sent to X (cdn.syndication.twimg.com, pbs.twimg.com)</h2>
-<p>For X posts Binder asks X&#39;s public embed endpoint for the post and the posts it replies to (one request per post, at most 30), using the post id. No X account, cookie or API key is used. Images from X posts are downloaded from pbs.twimg.com so they can be uploaded to Notion.</p>
+<p>For X posts Binder asks X's public embed endpoint for the post and the posts it replies to (one request per post, at most 30), using the post id. No X account, cookie or API key is used. Images from X posts are downloaded from pbs.twimg.com so they can be uploaded to Notion.</p>
 <h2>Obsidian</h2>
 <p>When the destination is Obsidian, the note is written as a Markdown file into the folder you chose on your computer, or handed to the Obsidian app through an <code>obsidian://</code> link (with the clipboard for long notes). Nothing is sent over the network for Obsidian.</p>
 <h2>Stored on your device</h2>
 <ul>
-<li>In the extension&#39;s IndexedDB: your Notion integration token and one AI API key per provider, and the handle of the Obsidian folder you chose.</li>
-<li>In <code>chrome.storage.local</code>: your settings (destination, chosen Notion database or page and its property mapping, provider, model, endpoint URL, Save mode, Obsidian folder and file name template) and the time the API key was last changed.</li>
+<li>In the extension's IndexedDB: your Notion integration token and one AI API key per provider, and the handle of the Obsidian folder you chose.</li>
+<li>In <code>chrome.storage.local</code>: your settings (destination, chosen Notion database or page and its property mapping, provider, model, endpoint URL, Save mode, Obsidian folder and file name template, weekly digest on/off, day, time and AI overview) and the time the API key was last changed; for the weekly digest, the titles and links of the last 20 digests Binder created (so a week is never created twice); for the Obsidian app route, the file names Binder created and the URL each was saved from (last 500), so a highlight can be added to the same note.</li>
 <li>In <code>chrome.storage.session</code> (cleared when the browser closes): the list of Notion database names shown in the setup picker, so reopening Options is quick.</li>
 </ul>
 <p>This data stays in your browser profile until you disconnect, change it or remove the extension. Binder does not sync it.</p>
 <h2>What Binder does not do</h2>
-<p>Binder does not read pages you do not save, does not keep a history of Binds, and does not send data anywhere other than the services listed above. It has no analytics, no advertising and no server of its own. Data is not sold or transferred to third parties other than the Notion workspace and AI provider you configure, is not used for purposes unrelated to saving Binds, and is not used to determine creditworthiness or for lending.</p>
+<p>Binder does not read pages you do not save, does not keep a history of browsing, and does not send data anywhere other than the services listed above. It has no analytics, no advertising and no server of its own. Data is not sold or transferred to third parties other than the Notion workspace and AI provider you configure, is not used for purposes unrelated to saving Binds, and is not used to determine creditworthiness or for lending.</p>
 <h2>Limited Use</h2>
 <p>The use of information received from Chrome APIs adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
 <h2>Trademarks</h2>
