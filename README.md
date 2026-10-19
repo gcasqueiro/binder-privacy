@@ -88,7 +88,7 @@ The use of information received from Chrome APIs adheres to the Chrome Web Store
 
 ## Trademarks
 
-Notion, X, Obsidian and the AI provider names are trademarks of their respective owners. Binder is an independent project and is not affiliated with or endorsed by them.
+Notion, X, Obsidian, YouTube and the AI provider names are trademarks of their respective owners. Binder is an independent project and is not affiliated with or endorsed by them.
 
 ## Contact
 
