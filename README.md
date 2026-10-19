@@ -92,4 +92,4 @@ Notion, X, Obsidian, YouTube and the AI provider names are trademarks of their r
 
 ## Contact
 
-Questions: email [contact@gcasqueiro.com](mailto:contact@gcasqueiro.com).
+Questions: email [mail@gcasqueiro.com](mailto:mail@gcasqueiro.com).
